@@ -22,7 +22,7 @@ function selectAction() {
     .prompt ({
         name: "action",
         type:"rawlist",
-        message: "Select the action you'd would like to perform?",
+        message: "Select the action you would like to perform?",
         choices : [
             "Add Department",
             "Add roles",
@@ -61,7 +61,7 @@ function selectAction() {
             break;
 
             case "Update employee roles":
-            updateEmployee ();
+            return updateEmployee();
             break;
 
             case "Call it a day":
@@ -190,10 +190,34 @@ selectAction();
 // This function updates the employee table.
 
 function updateEmployee(){
-    var query = "Select * FROM role";
+    const employees = viewEmployees();
+    const choices =  employees.map(({
+        id,firstname,lastname
+    })=>({
+        name:`${firstname} ${lastname}`, 
+        value: id
+    }))
+
+    const {employeeId} = inquirer
+    .prompt ({
+        name: "update",
+        type: "list",
+        message: "Which employee would you like to update?",
+        choices: choices
+    },
+    )
+    .then
+    var query = "UPDATE employee SET role_id = ? WHERE id = ?",
+
+    [roleId , employeeId]
+
+    
+
     connection.query(query, function (err, data){
         if (err) throw(err);
 
-    var updaterole = 
-    })
+    
+            
+    })    
+    console.log("this works.")
 }

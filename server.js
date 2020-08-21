@@ -22,7 +22,7 @@ function selectAction() {
     .prompt ({
         name: "action",
         type:"rawlist",
-        message: "Select the action youd would like to perform?",
+        message: "Select the action you'd would like to perform?",
         choices : [
             "Add Department",
             "Add roles",
@@ -30,7 +30,8 @@ function selectAction() {
             "View departments",
             "View roles",
             "View employees",
-            "update employee roles"
+            "update employee roles",
+            "Call it a day"
         ]
     })
     .then(function(answer){
@@ -62,6 +63,10 @@ function selectAction() {
             case "Update employee roles":
             updateEmployee ();
             break;
+
+            case "Call it a day":
+                console.log ("Thank you for using this application.");
+                connection.end();
         }
     })
 }
@@ -144,22 +149,14 @@ function addEmployees() {
 
 
 
-function viewDepartment(){
-    inquirer
-    .prompt ([
-        {
-        name:"view_department",
-        type: "input",
-        message: " What department would you like to view?"
-         }
-    ])
 
-    .then(function(answer){
-        var query = "SELECT * FROM department" 
-        connection.query(query, function(err, res){
-            if (err) throw err;
-            console.log ("-----Here is your department info---------")
-            selectAction();
-        })
-    })
+// This functions lets user view all the departments in DB.
+function viewDepartment(){
+ 
+        var query = "SELECT * FROM department" ;
+        connection.query(query, function(err, data) {          
+        if (err) throw (err) ;
+        console.log(data);
+        selectAction();
+     });
 }

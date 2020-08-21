@@ -141,3 +141,25 @@ function addEmployees() {
         })
     })
 }
+
+
+
+function viewDepartment(){
+    inquirer
+    .prompt ([
+        {
+        name:"view_department",
+        type: "input",
+        message: " What department would you like to view?"
+         }
+    ])
+
+    .then(function(answer){
+        var query = "SELECT * FROM department" 
+        connection.query(query, function(err, res){
+            if (err) throw err;
+            console.log ("-----Here is your department info---------")
+            selectAction();
+        })
+    })
+}

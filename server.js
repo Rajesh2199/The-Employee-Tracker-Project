@@ -185,3 +185,15 @@ selectAction();
  });
  
 }
+
+
+// This function updates the employee table.
+
+function updateEmployee(){
+    var query = "Select * FROM role";
+    connection.query(query, function (err, data){
+        if (err) throw(err);
+
+    var updaterole = 
+    })
+}

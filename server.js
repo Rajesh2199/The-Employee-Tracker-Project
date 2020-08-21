@@ -152,11 +152,36 @@ function addEmployees() {
 
 // This functions lets user view all the departments in DB.
 function viewDepartment(){
- 
-        var query = "SELECT * FROM department" ;
+        let query = "SELECT * FROM department" ;
         connection.query(query, function(err, data) {          
         if (err) throw (err) ;
         console.log(data);
-        selectAction();
+     
+    selectAction();
      });
+     
+}
+
+// This functions lets user view all the roles in DB.
+function viewRoles(){
+    let query = "SELECT * FROM role" ;
+    connection.query(query, function(err, data) {          
+    if (err) throw (err) ;
+    console.log(data);
+ 
+selectAction();
+ });
+ 
+}
+
+// This functions lets user view all the employees in DB.
+function viewEmployees(){
+    let query = "SELECT * FROM employee" ;
+    connection.query(query, function(err, data) {          
+    if (err) throw (err) ;
+    console.log(data);
+ 
+selectAction();
+ });
+ 
 }

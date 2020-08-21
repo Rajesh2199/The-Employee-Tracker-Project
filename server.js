@@ -23,10 +23,10 @@ function selectAction() {
         name: "action",
         type:"rawlist",
         message: "Select the action youd would like to perform?",
-        choicses : [
+        choices : [
             "Add Department",
             "Add roles",
-            "Add employess",
+            "Add employees",
             "View departments",
             "View roles",
             "View employees",
@@ -43,14 +43,101 @@ function selectAction() {
             addRoles();
             break;
 
-            case "Add Department":
-            addDepartment();
+            case "Add employees":
+            addEmployees();
             break;
 
-            case "Add employees":
-            addEmployees ();
+            case "View department":
+            viewDepartment();
+            break;
+
+            case "View roles":
+            viewRoles();
+            break;
+
+            case "View employees":
+            viewEmployees ();
+            break;
+
+            case "Update employee roles":
+            updateEmployee ();
             break;
         }
     })
 }
 
+
+function addDepartment() {
+    inquirer
+    .prompt ({
+        name:"department",
+        type:"input",
+        message:"What department would you like to add?"
+    })
+    .then(function(answer){
+        var query = "INSERT INTO department SET ?" 
+        connection.query(query, {name: answer.department}, function(err, res){
+            if (err) throw err;
+            console.log ("Your department has been added.")
+            selectAction();
+        })
+    })
+}
+
+
+function addRoles() {
+    inquirer
+    .prompt ([
+    {
+        name:"roles",
+        type:"input",
+        message:"What roles would you like to add?"
+    },
+
+    {
+        name:"salary",
+        type:"input",
+        message:"What is the salary for this role?"
+    }
+    ])
+
+    
+    .then(function(answer){
+        var query = "INSERT INTO role SET ?" 
+        connection.query(query, {title: answer.roles, salary:answer.salary}, function(err, res){
+            if (err) throw err;
+            console.log ("Your role has been added.")
+            selectAction();
+        })
+    })
+}
+
+
+
+function addEmployees() {
+    inquirer
+    .prompt ([
+    {
+        name:"firstname",
+        type:"input",
+        message:"What is the first name of the employee?"
+    },
+
+    {
+        name:"lastname",
+        type:"input",
+        message:"What is the last name of the employee?"
+    },
+    
+    ])
+
+    
+    .then(function(answer){
+        var query = "INSERT INTO employee SET ?" 
+        connection.query(query, {firstname: answer.firstname, lastname:answer.lastname}, function(err, res){
+            if (err) throw err;
+            console.log ("Your employee has been added.")
+            selectAction();
+        })
+    })
+}
